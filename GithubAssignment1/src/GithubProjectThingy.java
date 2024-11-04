@@ -7,6 +7,8 @@ public class GithubProjectThingy {
 	}
 	public static void main(String[] args) { 
 	System.out.println("Github Project Assignment");
-}
+	System.out.println("This is the change to my project, Hopefully this succeeds ");
 
+}
+// This is the change to my project, Hopefully this succeeds 
 }
