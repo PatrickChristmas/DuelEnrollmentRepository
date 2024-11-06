@@ -31,13 +31,16 @@ public class UserNamePanel extends JPanel {
         setLayout(new BorderLayout());
         setBackground(pokerGreenColor);
 
-        // Create top and bottom navy blue panels
+        // creates top and bottom navy blue panels
         Color navy = new Color(25, 25, 112);
         JPanel topPanel = new JPanel();
+        // sets the background to navy
         topPanel.setBackground(navy);
         topPanel.setPreferredSize(new Dimension(0, 100));
+        // adds the panel to the top of the border layout 
         add(topPanel, BorderLayout.NORTH);
-
+        
+       // creates the bottom as navy
         JPanel bottomPanel = new JPanel();
         bottomPanel.setBackground(navy);
         bottomPanel.setPreferredSize(new Dimension(0, 100));
@@ -47,19 +50,22 @@ public class UserNamePanel extends JPanel {
         JLabel welcomeLabel = new JLabel("Welcome to Pat's Poker Palace", JLabel.CENTER);
         welcomeLabel.setFont(new Font("Egyptienne", Font.BOLD, 60));
         welcomeLabel.setForeground(Color.RED);
+        // adds the welcome label to the top
         topPanel.add(welcomeLabel);
 
-        // Input panel with GridBagLayout
+        // Input panel using GridBagLayout
         JPanel inputPanel = new JPanel(new GridBagLayout());
         inputPanel.setBackground(pokerGreenColor);
+        //  specifies the constraints for components  
         GridBagConstraints layoutOrder = new GridBagConstraints();
-        layoutOrder.insets = new Insets(5, 10, 10, 10);
+        layoutOrder.insets = new Insets(5, 10, 10, 10); // actually specifies the margins around the component 
         layoutOrder.fill = GridBagConstraints.HORIZONTAL;
 
-        // Username label
+        // creates the Username label
         JLabel inputLabel = new JLabel("Input Username: ");
         inputLabel.setFont(new Font("Egyptienne", Font.BOLD, 40));
         inputLabel.setForeground(Color.WHITE);
+        // sets the position of the inputlabel
         layoutOrder.gridx = 0;
         layoutOrder.gridy = 0;
         inputPanel.add(inputLabel, layoutOrder);
@@ -67,29 +73,31 @@ public class UserNamePanel extends JPanel {
         // Username text field
         usernameField = new JTextField(15);
         usernameField.setToolTipText("Enter your username");
+        // sets the position of the UsernameField
         layoutOrder.gridx = 1;
         inputPanel.add(usernameField, layoutOrder);
 
-        // Play button
+        // starts the game, 'Play' button
         startButton = new JButton("Play");
         startButton.setFont(new Font("Egyptienne", Font.BOLD, 30));
         startButton.setForeground(Color.WHITE);
         startButton.setBackground(Color.BLACK);
+        // sets the position of the startButton
         layoutOrder.gridx = 2;
         inputPanel.add(startButton, layoutOrder);
 
-        // Initialize dollar button group and buttons
+        // Initializes dollar button group and buttons
         dollarButtonGroup = new ButtonGroup();
         thousandDollarButton = new JRadioButton("Start with $1000");
         twoThousandDollarButton = new JRadioButton("Start with $2000");
         threeThousandDollarButton = new JRadioButton("Start with $3000");
 
-        // Configure button appearance
+        // configure button appearance (font, color, background)
         configureRadioButton(thousandDollarButton);
         configureRadioButton(twoThousandDollarButton);
         configureRadioButton(threeThousandDollarButton);
 
-        // Add buttons to group
+        // Adds the buttons to group, so only one button can be selected at once
         dollarButtonGroup.add(thousandDollarButton);
         dollarButtonGroup.add(twoThousandDollarButton);
         dollarButtonGroup.add(threeThousandDollarButton);
@@ -102,18 +110,17 @@ public class UserNamePanel extends JPanel {
         ActionListener selectionListener = new ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent e) {
-                updateSelectedAmount(); // Ensure update on selection change
-                // Debugging log to track the selected amount change
+                updateSelectedAmount(); // Ensure update on selection change with radiobutton
                 System.out.println("Selected Amount inside ActionListener (after change): " + selectedAmount);
             }
         };
 
-        // Add ActionListener to each button
+        // Adds the ActionListener to each button
         thousandDollarButton.addActionListener(selectionListener);
         twoThousandDollarButton.addActionListener(selectionListener);
         threeThousandDollarButton.addActionListener(selectionListener);
 
-        // Add buttons to input panel
+        // Adds the buttons to input panel
         layoutOrder.gridy = 1;
         inputPanel.add(thousandDollarButton, layoutOrder);
         layoutOrder.gridy++;
@@ -121,10 +128,11 @@ public class UserNamePanel extends JPanel {
         layoutOrder.gridy++;
         inputPanel.add(threeThousandDollarButton, layoutOrder);
 
-        // Add input panel to the center of UserNamePanel
+        // Adds the input panel to the center of UserNamePanel
         add(inputPanel, BorderLayout.CENTER);
     }
-
+    
+    // sets specifiers of the radiobutton 
     private void configureRadioButton(JRadioButton button) {
         button.setFont(new Font("Egyptienne", Font.BOLD, 30));
         button.setForeground(Color.WHITE);
