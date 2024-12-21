@@ -25,6 +25,13 @@ import java.awt.Dimension;
 import java.awt.event.KeyListener; 
 import java.awt.event.KeyEvent; 
 
+/**
+ * @author PatrickChristmas
+ * @version December 20 2024.
+ * The GamePanel class is the panel where the poker game is displayed. It handles the drawing of cards, chips, 
+ * updating the user's bet, current money, and the animation of chips and cards. It involves the user's interaction by   
+ * pressing arrow keys and clicking a button to draw a card.
+ */
 public class GamePanel extends JPanel implements KeyListener {
 	private Drawing curCard; // current card being drawn
 	private ArrayList<String> cardImage;  // array of the names of card images
@@ -93,6 +100,12 @@ public class GamePanel extends JPanel implements KeyListener {
 	
 
 	// takes in the username
+	/**
+     * Constructor for the GamePanel class.
+     * Initializes the panel, loads images, and sets up the game.
+     * 
+     * @param username1, The username of the player
+     */
 	GamePanel(String username1) {
 		username = username1; 
 		
@@ -135,10 +148,10 @@ public class GamePanel extends JPanel implements KeyListener {
 		setFocusable(true); 
 		requestFocusInWindow(); 
 		
-		// gets the current Money from the UserNamePanel Class (DOES NOT WORK! getSelectedAmount(), does not work right now)
+		// gets the current Money from the UserNamePanel Class 
 		UserNamePanel usp = new UserNamePanel();
 		currentMoney = usp.getSelectedAmount(); 
-		System.out.println(currentMoney);
+		
 		
 		 
 		
@@ -150,6 +163,9 @@ public class GamePanel extends JPanel implements KeyListener {
 	} 
 		
 	// used to animated the chips 
+	   /**
+     * Starts the chip animation. Chips will move towards the center of the screen.
+     */
 	private void startChipAnimation() {
 		
 	    // 3000 ms delay (3 seconds)
@@ -178,7 +194,9 @@ public class GamePanel extends JPanel implements KeyListener {
 	    delayTimer.start();
 	}
 	
-	
+	/**
+     * Starts the card animation. The card will move towards the center of the screen.
+     */
 	 private void startCardAnimation() {
 	        cardAnimationTimer = new Timer(16, new ActionListener() {
 	            @Override
@@ -198,7 +216,9 @@ public class GamePanel extends JPanel implements KeyListener {
 	    }
 	
 	 
-	 
+	  /**
+	     * Loads images for the poker table, chips, and background.
+	     */
 	private void imageLoader() {
 		// Matches each file to their image
 		File file1 = new File("Images/PokerTable.PNG");
@@ -232,6 +252,11 @@ public class GamePanel extends JPanel implements KeyListener {
 	} 	
 	
 	// method to increase the bet amount, also repaints the amount after it increases
+    /**
+     * Increases the current bet by a specified amount and repaints the panel to reflect the changes.
+     * 
+     * @param amount The amount to increase the bet by
+     */
 	private void increaseBet(int amount) {
 		currentBet += amount;
 	
@@ -242,6 +267,11 @@ public class GamePanel extends JPanel implements KeyListener {
 	}
 	
 	// creates the draw button at the top of the screen.
+	/**
+     * Creates a button that allows the player to draw a card.
+     * 
+     * @return A JButton that can be clicked to draw a card
+     */
 	private JButton createDrawButton() {
 		JButton button = new JButton("Draw Another Card");
 		button.setFont(new Font("Egyptienne", Font.BOLD, 40));
@@ -261,6 +291,9 @@ public class GamePanel extends JPanel implements KeyListener {
 		);
 		return button; 
 	}
+	/**
+     * Draws a random card and starts its animation.
+     */
 	private void drawCard() {
 	    // Check if there are cards left to draw
 	    if (cardImage.isEmpty()) {
@@ -294,6 +327,10 @@ public class GamePanel extends JPanel implements KeyListener {
 	    repaint(); // repaints to show the new cards
 	}
 	
+	/**
+	 * Draws the chips based on the currentBet
+	 * @param g, Draws items using the Graphics object 
+	 */
 	private void drawChips(Graphics g) {
 	   
 
@@ -338,6 +375,10 @@ public class GamePanel extends JPanel implements KeyListener {
 	}
 	
 	// draws the table and the backgroundTexture (carpet) 
+	/**
+	 * Draws the table and the background image to a given size.
+	 * @param g, the Graphics object used for drawing the image.
+	 */
 	private void drawTable(Graphics g) {
 		if (backgroundTexture != null) {
 			g.drawImage(backgroundTexture, 0, 0, null);
@@ -348,6 +389,10 @@ public class GamePanel extends JPanel implements KeyListener {
 		
 	}
 	
+	/**
+	 * Draws the username, table, chips, and cards.
+	 * @param g, the Graphics object used for drawing the image.
+	 */
 	@Override 
 	public void paintComponent(Graphics g) {
 	    super.paintComponent(g);
@@ -382,6 +427,9 @@ public class GamePanel extends JPanel implements KeyListener {
 	    }
 	}
 	
+	/**
+	 * Moves the chips towards the center of the screen's X.
+	 */
 	private void moveChipsTowardsCenterX() {
 	    int centerX = getWidth() / 2; // center of the X 
 
@@ -431,6 +479,9 @@ public class GamePanel extends JPanel implements KeyListener {
 	    }
 	}
 	
+	/**
+	 * Moves the Cards towards the center of the Screen's X.
+	 */
 	private void moveCardTowardsCenterX() {
 	    // moves the card towards target X coordinate (center) then stops (this is approaching from the right)
 	    if (animatedCardX < targetX) {
@@ -448,6 +499,9 @@ public class GamePanel extends JPanel implements KeyListener {
 	    }
 	}
 
+	/**
+	 *  Moves the Card towards the center of the screen's Y. 
+	 */
 	private void moveCardTowardsCenterY() {
 	     // moves the card towards target Y coordinate (center) then stops (this is approaching from the bottom)
 	    if (animatedCardY < targetY) {
@@ -466,6 +520,9 @@ public class GamePanel extends JPanel implements KeyListener {
 	
 	
 	// moves chips towards the center y 
+	/**
+	 * Moves the chips towards the center of the screen's Y
+	 */
 	private void moveChipsTowardsCenterY() {
 	    int centerY = getHeight() / 2; // center y coordinate
 
@@ -515,6 +572,9 @@ public class GamePanel extends JPanel implements KeyListener {
 	
 	
 	
+	/**
+	 * If the Up arrow or the Down arrow are pressed, it increases or decreases the bet amount. 
+	 */
 	@Override 
 	// adjusts the bet amount according to how much you press the up or down arrows. 
 	public void keyPressed(KeyEvent e) {
@@ -546,6 +606,11 @@ public class GamePanel extends JPanel implements KeyListener {
 	
 	
 	// moves the card, not used in this lab, but will be used in later projects
+	/**
+	 * Moves the Card
+	 * @param x, moves card according to x 
+	 * @param y, moves card according to y 
+	 */
 	public void moveCard(int x, int y) {
 		if (curCard != null) {
 			curCard.move(x, y, getWidth(), getHeight());
@@ -555,6 +620,9 @@ public class GamePanel extends JPanel implements KeyListener {
 	
 	
 	// adds the String names of the images to the arrayList cardImage
+	  /**
+     * Adds cards to the deck by populating the cardImage list.
+     */
 	private void addItemsToCards() {
 		
 
@@ -668,6 +736,12 @@ public class GamePanel extends JPanel implements KeyListener {
 		cardImage.add("Images/KingOfClubs.PNG");
 	}
 	// toString 
+	/**
+     * 
+     * 
+     * @return a string including username, 
+     *  current bet, drawn cards, red chips, blue chips, green chips,
+     */
 	@Override
 	public String toString() {
 	    return "GamePanel [" +
