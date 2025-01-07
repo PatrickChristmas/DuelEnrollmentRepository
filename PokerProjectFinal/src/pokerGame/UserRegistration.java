@@ -91,5 +91,18 @@ public class UserRegistration {
         }
         closeRegistration(); 
     }
+	
+	@Override
+	public String toString() {
+	    if (users == null || users.length == 0) {
+	        return "No registered users.";
+	    }
+	    String result = "Registered Users: ";
+	    for (User user : users) {
+	        result += user.getUser() + " ";  // Assumes User class has a getUser method
+	    }
+	    return result;
+	}
+	
 
 }

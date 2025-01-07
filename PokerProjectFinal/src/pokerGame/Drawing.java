@@ -2,7 +2,6 @@ package pokerGame;
 
 import java.awt.Image;
 import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.io.File;
