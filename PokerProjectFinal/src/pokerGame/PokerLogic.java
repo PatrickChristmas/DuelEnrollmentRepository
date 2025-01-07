@@ -15,7 +15,7 @@ public class PokerLogic {
 	
 	/**
 	 * evaluates a five-card poker hand and determines its rank
-	 * @param hand the list of cards representing the poker hand
+	 * @param hand, the list of cards representing the poker hand
 	 * @return a string representing the rank of the poker hand
 	 */
 	private static String evaluateFiveCardHand(ArrayList<Card> hand) {
@@ -41,22 +41,22 @@ public class PokerLogic {
 	        System.out.println("Hand is Full House");
 	        return "Full House: " + isFullHouse(values);
 	    } else if (isFlush(suits)) {
-	        System.out.println("Hand is Flush");
+	        System.out.println("Hand is a Flush");
 	        return "Flush";
 	    } else if (isStraight(values)) {
-	        System.out.println("Hand is Straight");
+	        System.out.println("Hand is a Straight");
 	        return "Straight";
 	    } else if (isThreeOfAKind(values) != null) {
 	        System.out.println("Hand is Three of a Kind");
 	        return "Three of a Kind: " + isThreeOfAKind(values);
 	    } else if (isTwoPair(values) != null) {
-	        System.out.println("Hand is Two Pair");
+	        System.out.println("Hand is a Two Pair");
 	        return "Two Pair: " + isTwoPair(values);
 	    } else if (isOnePair(values) != null) {
-	        System.out.println("Hand is One Pair");
+	        System.out.println("Hand is a One Pair");
 	        return "One Pair: " + isOnePair(values);
 	    } else {
-	        System.out.println("Hand is High Card");
+	        System.out.println("Hand is a High Card");
 	        return "High Card: " + highCard(values);
 	    }
 	}
@@ -64,8 +64,8 @@ public class PokerLogic {
 	
 	/**
 	 * determines the best hand from a set of cards and a specified hand size
-	 * @param cards the list of all available cards
-	 * @param handSize the size of the hand to evaluate
+	 * @param cards, the list of all available cards
+	 * @param handSize, the size of the hand to evaluate
 	 * @return the best hand as an ArrayList of cards
 	 */
 	public static ArrayList<Card> getBestHand(ArrayList<Card> cards, int handSize) {
@@ -93,8 +93,8 @@ public class PokerLogic {
 
 	/**
 	 * generates all possible combinations of a specified hand size from a list of cards
-	 * @param cards the list of cards to generate combinations from
-	 * @param handSize the size of each combination
+	 * @param cards, the list of cards to generate combinations from
+	 * @param handSize, the size of each combination
 	 * @return a list of all possible combinations as lists of cards
 	 */
 	private static ArrayList<ArrayList<Card>> generateCardCombinations(ArrayList<Card> cards, int handSize) {
@@ -111,11 +111,11 @@ public class PokerLogic {
 
 	/**
 	 * recursively generates combinations of cards
-	 * @param cards the list of available cards
-	 * @param start the starting index for combination generation
-	 * @param current the current combination being constructed
-	 * @param combinations the list to store all generated combinations
-	 * @param handSize the target size of each combination
+	 * @param cards, the list of available cards
+	 * @param start, the starting index for combination generation
+	 * @param current, the current combination being constructed
+	 * @param combinations, the list to store all generated combinations
+	 * @param handSize, the target size of each combination
 	 */
 	private static void combine(ArrayList<Card> cards, int start, ArrayList<Card> current, ArrayList<ArrayList<Card>> combinations, int handSize) {
 	    
@@ -415,8 +415,8 @@ public class PokerLogic {
 
 	/**
 	 * checks if the hand is a straight
-	 * @param values an array of card values in the hand
-	 * @return true if the hand is a straight, false otherwise
+	 * @param values, an array of card values in the hand
+	 * @return true, if the hand is a straight, false otherwise
 	 */
 	private static boolean isStraight(String[] values) {
 
@@ -459,7 +459,7 @@ public class PokerLogic {
     
 	/**
 	 * assigns a numerical value to a poker hand rank
-	 * @param handRank the rank of the hand as a string
+	 * @param handRank, the rank of the hand as a string
 	 * @return the numerical value of the hand rank, where higher values indicate stronger hands
 	 */
 	private static int getHandValue(String handRank) {
@@ -493,7 +493,7 @@ public class PokerLogic {
 
 	/**
 	 * checks if the hand contains four of a kind
-	 * @param values an array of card values in the hand
+	 * @param values, an array of card values in the hand
 	 * @return the value of the card that forms four of a kind, or null if no four of a kind is present
 	 */
 	private static String isFourOfAKind(String[] values) {
@@ -523,7 +523,7 @@ public class PokerLogic {
 
 	/**
 	 * checks if the hand is a full house
-	 * @param values an array of card values in the hand
+	 * @param values, an array of card values in the hand
 	 * @return a string representing the full house (three of a kind over a pair), or null if no full house is present
 	 */
 	private static String isFullHouse(String[] values) {
@@ -564,7 +564,7 @@ public class PokerLogic {
 
 	/**
 	 * checks if the hand contains three of a kind
-	 * @param values an array of card values in the hand
+	 * @param values, an array of card values in the hand
 	 * @return the value of the card that forms three of a kind, or null if no three of a kind is present
 	 */
 	private static String isThreeOfAKind(String[] values) {
@@ -594,7 +594,7 @@ public class PokerLogic {
 
 	/**
 	 * checks if the hand contains two pairs
-	 * @param values an array of card values in the hand
+	 * @param values, an array of card values in the hand
 	 * @return a string representing the two pairs (highest pair first), or null if no two pairs are present
 	 */
 	private static String isTwoPair(String[] values) {
@@ -637,7 +637,7 @@ public class PokerLogic {
 
 	/**
 	 * checks if the hand contains one pair
-	 * @param values an array of card values in the hand
+	 * @param values, an array of card values in the hand
 	 * @return the value of the card that forms the pair, or null if no pair is present
 	 */
 	private static String isOnePair(String[] values) {
@@ -671,7 +671,7 @@ public class PokerLogic {
 
 	/**
 	 * determines the high card in the hand
-	 * @param values an array of card values in the hand
+	 * @param values, an array of card values in the hand
 	 * @return the value of the highest-ranked card as a string
 	 */
 	private static String highCard(String[] values) {
@@ -679,11 +679,14 @@ public class PokerLogic {
 	    // defines the rank order of card values
 	    String[] rankOrder = {"Ace", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Jack", "Queen", "King"};
 
-	    // sorts the card values in descending order of their ranks
-	    Arrays.sort(values, (a, b) -> {
-	        int rankA = Arrays.asList(rankOrder).indexOf(a); // gets the rank of card a
-	        int rankB = Arrays.asList(rankOrder).indexOf(b); // gets the rank of card b
-	        return Integer.compare(rankB, rankA); // compares the ranks in descending order
+	 // sorts the card values in descending order of their ranks
+	    Arrays.sort(values, new Comparator<String>() {
+	        @Override
+	        public int compare(String a, String b) {
+	            int rankA = Arrays.asList(rankOrder).indexOf(a); // gets the rank of card a
+	            int rankB = Arrays.asList(rankOrder).indexOf(b); // gets the rank of card b
+	            return Integer.compare(rankB, rankA); // compares the ranks in descending order
+	        }
 	    });
 
 	    // returns the highest-ranked card
@@ -695,7 +698,7 @@ public class PokerLogic {
     
 	/**
 	 * evaluates the rank of a given poker hand
-	 * @param hand the list of cards representing the poker hand
+	 * @param hand, the list of cards representing the poker hand
 	 * @return a string representing the rank of the poker hand
 	 */
 	public static String evaluateHandRank(ArrayList<Card> hand) {

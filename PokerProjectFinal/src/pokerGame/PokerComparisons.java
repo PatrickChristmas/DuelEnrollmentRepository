@@ -13,7 +13,7 @@ public class PokerComparisons {
      * finds the winner among players using their cards and community cards
      *
      * @param players, players in the game
-     * @param communityCards the community cards
+     * @param communityCards, the community cards
      * @return the player with the best hand
      */
     public static Player evaluateWinner(ArrayList<Player> players, ArrayList<Card> communityCards) {
@@ -56,8 +56,8 @@ public class PokerComparisons {
     /**
      * checks if one hand rank is better than another
      *
-     * @param currentHand current player's hand rank
-     * @param bestHand    best hand rank so far
+     * @param currentHand, current player's hand rank
+     * @param bestHand, best hand rank so far
      * @return true if currentHand is better
      */
     private static boolean isHandRankHigher(String currentHand, String bestHand) {
@@ -92,8 +92,8 @@ public class PokerComparisons {
     /**
      * compares the kickers of two hands
      *
-     * @param hand1 first hand
-     * @param hand2 second hand
+     * @param hand1, first hand
+     * @param hand2, second hand
      * @return positive if hand1 is better, negative if hand2, zero if tie
      */
     private static int compareKickers(ArrayList<Card> hand1, ArrayList<Card> hand2) {
@@ -112,7 +112,7 @@ public class PokerComparisons {
     /**
      * gets numerical card ranks sorted in descending order
      *
-     * @param hand the hand of cards
+     * @param hand, the hand of cards
      * @return sorted list of card ranks
      */
     private static ArrayList<Integer> getCardRanks(ArrayList<Card> hand) {
@@ -127,7 +127,7 @@ public class PokerComparisons {
     /**
      * maps card value to a numerical rank
      *
-     * @param value card value as string
+     * @param value, card value as string
      * @return numerical rank of card
      */
     private static int getCardRank(String value) {
