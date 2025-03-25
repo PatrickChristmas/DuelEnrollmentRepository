@@ -19,12 +19,12 @@ public class Drawing {
     /**
      * The height of the card.
      */
-    private static int height = 100;
+    private static final int HEIGHT = 100;
 
     /**
      * The width of the card.
      */
-    private static int width = 100;
+    private static final int WIDTH = 100;
 
     /**
      * The image of the card
@@ -47,7 +47,7 @@ public class Drawing {
         File file = new File(filename);
         try {
             // SCALE_SMOOTH used to resize the image
-            card = ImageIO.read(file).getScaledInstance(width, height, Image.SCALE_SMOOTH);
+            card = ImageIO.read(file).getScaledInstance(WIDTH, HEIGHT, Image.SCALE_SMOOTH);
         } catch(IOException e) { 
             System.out.println("Image Not Found " + filename);
             card = null;
@@ -93,10 +93,10 @@ public class Drawing {
             x = 0; 
         }
         if (x < 0) {
-            x = panelWidth - width;
+            x = panelWidth - WIDTH;
         }
         if (y < 0) {
-            y = panelHeight - height;
+            y = panelHeight - HEIGHT;
         }
         if(y > panelHeight) {
             y = 0;
@@ -111,7 +111,7 @@ public class Drawing {
      * @return the width of the card.
      */
     public static int getWidth() {
-        return width;
+        return WIDTH;
     }
 
     /**
@@ -120,7 +120,7 @@ public class Drawing {
      * @return the height of the card.
      */
     public static int getHeight() {
-        return height;
+        return HEIGHT;
     }
 
     /**
@@ -136,7 +136,7 @@ public class Drawing {
             cardStatus = "Not Loaded";
         }
 
-        return "Drawing [Width: " + width + ", Height: " + height + 
+        return "Drawing [Width: " + WIDTH + ", Height: " + HEIGHT + 
                ", Card Status: " + cardStatus + ", Position: (" + point.getX() + ", " + point.getY() + ")]";
     }
 }

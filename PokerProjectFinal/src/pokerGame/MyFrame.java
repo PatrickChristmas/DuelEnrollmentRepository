@@ -22,7 +22,7 @@ import java.awt.Toolkit;
 public class MyFrame extends JFrame {
     
     private GamePanel gamePanel;
-    private UserNamePanel usernamePanel;
+    private SettingsPanel usernamePanel;
     private UserSetUp userSetUp;
     private UserRegistration userRegistration;
     private JPanel errorPanel;
@@ -59,7 +59,7 @@ public class MyFrame extends JFrame {
      */
     private void initializeComponents() {
         userSetUp = new UserSetUp();
-        usernamePanel = new UserNamePanel();
+        usernamePanel = new SettingsPanel();
         initializeErrorPanel();
 
         // adds login panel to the frame

@@ -53,6 +53,15 @@ public class Player {
         return money;
     }
     
+    public void setCards(ArrayList<Card> newCards) {
+        this.cards = newCards;
+    }
+
+    public void setFolded(boolean folded) {
+        this.hasFolded = folded;
+    }
+    
+    
     /**
      * setter for the money 
      * @param money
@@ -118,6 +127,14 @@ public class Player {
         }
         cards.add(card);
     }
+    
+    public void resetForNewRound() {
+        this.currentBet = 0;
+        this.cards.clear();  
+        this.hasFolded = false; 
+    }
+    
+    
 
     // returns a string representation of the player
     @Override
