@@ -7,8 +7,6 @@ import java.awt.event.ActionListener;
 
 /**
  * The UserNamePanel class represents the initial user GUI for the poker game,
- * where the player selects their starting amount of money, chooses a difficulty,
- * and starts the game.
  */
 public class SettingsPanel extends JPanel {
 
@@ -22,25 +20,24 @@ public class SettingsPanel extends JPanel {
     private static int selectedAmount;                    // The selected starting amount for the player
 
     /**
-     * Constructor for the UserNamePanel class.
-     * Sets up the layout and initializes components with improved styling and gradients.
+     * Sets up the layout and initializes components with styling and gradients.
      */
     public SettingsPanel() {
-        // Use GridBagLayout for flexible positioning
+        // use GridBagLayout for flexible positioning
         setLayout(new GridBagLayout());
-        // Make the panel non-opaque so our custom gradient shows through
+        // Make the panel non opaque so our custom gradient shows through
         setOpaque(false);
 
         GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(10, 10, 10, 10); // Padding between components
+        gbc.insets = new Insets(10, 10, 10, 10); // padding between components
         gbc.fill = GridBagConstraints.HORIZONTAL;
 
-        // Title label with a casino-style look
+        // Title label with a casino style look
         JLabel welcomeLabel = new JLabel("Let's Play Poker", SwingConstants.CENTER);
         welcomeLabel.setFont(new Font("Serif", Font.BOLD, 48));
         welcomeLabel.setForeground(new Color(255, 215, 0)); // Gold text
         welcomeLabel.setOpaque(true);
-        welcomeLabel.setBackground(new Color(0, 0, 0, 150)); // Semi-transparent black
+        welcomeLabel.setBackground(new Color(0, 0, 0, 150)); // Semi transparent black
         welcomeLabel.setBorder(new RoundedBorder(Color.BLACK, 5)); // Rounded border
         gbc.gridx = 0;
         gbc.gridy = 0;
@@ -49,7 +46,7 @@ public class SettingsPanel extends JPanel {
 
         // Create the "Select Difficulty" button using our custom GradientButton
         selectDifficultyButton = new GradientButton("Select Difficulty");
-        selectDifficultyButton.setBackground(new Color(128, 0, 0)); // Maroon color
+        selectDifficultyButton.setBackground(new Color(128, 0, 0)); // Maron color
         selectDifficultyButton.setForeground(Color.WHITE);
         selectDifficultyButton.setFont(new Font("Arial", Font.BOLD, 24));
         gbc.gridx = 0;
@@ -57,7 +54,7 @@ public class SettingsPanel extends JPanel {
         gbc.gridwidth = 1;
         add(selectDifficultyButton, gbc);
 
-        // Create the "Play" button using our custom GradientButton
+        // Create the "Play" button using   GradientButton
         playButton = new GradientButton("Play");
         playButton.setBackground(new Color(128, 0, 0)); // Maroon color
         playButton.setForeground(Color.WHITE);
@@ -66,29 +63,34 @@ public class SettingsPanel extends JPanel {
         gbc.gridy = 1;
         add(playButton, gbc);
 
-        // Default action for the "Select Difficulty" button:
-        // Show a pop-up with "Easy", "Medium", and "Hard" options.
-        selectDifficultyButton.addActionListener(e -> {
-            Object[] difficulties = {"Easy", "Medium", "Hard"};
-            int selected = JOptionPane.showOptionDialog(
-                this,
-                "Select Difficulty",
-                "Difficulty Selection",
-                JOptionPane.DEFAULT_OPTION,
-                JOptionPane.QUESTION_MESSAGE,
-                null,
-                difficulties,
-                difficulties[0]
-            );
-            if (selected != -1) {
-                System.out.println("Selected difficulty: " + difficulties[selected]);
-                // You can store or use the selected difficulty as needed.
+        // Shows a pop-up with "easy", "medium", and "hard" options
+        selectDifficultyButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent e) {
+                Object[] difficulties = {"Easy", "Medium", "Hard"};
+                int selected = JOptionPane.showOptionDialog(
+                    SettingsPanel.this,
+                    "Select Difficulty",
+                    "Difficulty Selection",
+                    JOptionPane.DEFAULT_OPTION,
+                    JOptionPane.QUESTION_MESSAGE,
+                    null,
+                    difficulties,
+                    difficulties[0]
+                );
+                if (selected != -1) {
+                    System.out.println("Selected difficulty: " + difficulties[selected]);
+                }
             }
         });
 
-        // Create an ActionListener for the radio buttons to update the selected amount.
-        ActionListener selectionListener = e -> updateSelectedAmount();
-
+        // creates an ActionListener for the radio buttons to update the selected amount.
+        ActionListener selectionListener = new ActionListener() {
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent e) {
+                updateSelectedAmount();
+            }
+        };
         // Radio buttons for starting money options
         dollarButtonGroup = new ButtonGroup();
         thousandDollarButton = new JRadioButton("Start with $1000");
@@ -100,7 +102,7 @@ public class SettingsPanel extends JPanel {
         twoThousandDollarButton.addActionListener(selectionListener);
         threeThousandDollarButton.addActionListener(selectionListener);
 
-        // Configure the appearance of the radio buttons
+        // configures the appearance of the radio buttons
         configureRadioButton(thousandDollarButton);
         configureRadioButton(twoThousandDollarButton);
         configureRadioButton(threeThousandDollarButton);
@@ -110,7 +112,7 @@ public class SettingsPanel extends JPanel {
         dollarButtonGroup.add(twoThousandDollarButton);
         dollarButtonGroup.add(threeThousandDollarButton);
 
-        // Add the radio buttons to the panel
+        // add the radio buttons to the panel
         gbc.gridx = 0;
         gbc.gridy = 2;
         gbc.gridwidth = 2;
@@ -124,9 +126,8 @@ public class SettingsPanel extends JPanel {
     }
 
     /**
-     * Configures the appearance of a radio button with updated colors and a rounded border.
-     *
-     * @param button The radio button to configure.
+     * Configures the appearance of a radio button with updated colors and a rounded border
+     * @param button The radio button to change
      */
     private void configureRadioButton(JRadioButton button) {
         button.setFont(new Font("Arial", Font.BOLD, 24));
@@ -137,7 +138,7 @@ public class SettingsPanel extends JPanel {
     }
 
     /**
-     * Updates the selected amount based on the selected radio button.
+     * Updates the selected amount based on the selected radio button
      */
     private void updateSelectedAmount() {
         selectedAmount = thousandDollarButton.isSelected() ? 1000 :
@@ -146,7 +147,7 @@ public class SettingsPanel extends JPanel {
     }
 
     /**
-     * Getter for the selected starting amount.
+     * getter for the selected starting amount.
      *
      * @return The selected amount.
      */
@@ -155,7 +156,7 @@ public class SettingsPanel extends JPanel {
     }
 
     /**
-     * Sets the action listener for the Play button.
+     * sets the action listener for the Play button.
      *
      * @param listener The action listener to add to the Play button.
      */
@@ -172,37 +173,29 @@ public class SettingsPanel extends JPanel {
         selectDifficultyButton.addActionListener(listener);
     }
 
-    /**
-     * Returns a string containing the selected amount and the Play button's enabled status.
-     */
-    @Override
-    public String toString() {
-        return "SelectedAmount: " + selectedAmount +
-               ", Play Button Enabled: " + playButton.isEnabled();
-    }
-
+    
     /**
      * Overrides paintComponent to draw a gradient background.
      */
     @Override
     protected void paintComponent(Graphics g) {
-        // Paint our custom gradient background before any child components are painted.
+        // paints a custom gradient background 
         Graphics2D g2d = (Graphics2D) g.create();
         int w = getWidth();
         int h = getHeight();
-        // Gradient from a dark green to a lighter green
+        // Green gradient
         Color startColor = new Color(39, 119, 20);
         Color endColor = new Color(60, 179, 113);
         GradientPaint gp = new GradientPaint(0, 0, startColor, 0, h, endColor);
         g2d.setPaint(gp);
         g2d.fillRect(0, 0, w, h);
         g2d.dispose();
-        // Now let the normal painting occur (child components, etc.)
         super.paintComponent(g);
     }
 
     /**
-     * A simple custom rounded border for a softer, modern look.
+     * A  rounded border
+     * StackOverflow sample
      */
     private static class RoundedBorder implements Border {
         private Color color;
@@ -231,7 +224,8 @@ public class SettingsPanel extends JPanel {
     }
 
     /**
-     * Custom JButton that paints a gradient background with rounded corners.
+     * custom JButton that paints a gradient background with rounded corners
+     * StackOverflow sample
      */
     private static class GradientButton extends JButton {
         public GradientButton(String text) {
@@ -244,18 +238,18 @@ public class SettingsPanel extends JPanel {
         @Override
         protected void paintComponent(Graphics g) {
             Graphics2D g2 = (Graphics2D) g.create();
-            // Enable anti-aliasing for smoother graphics
+            // Enable anti aliasing for smoother graphics
             g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
             int w = getWidth();
             int h = getHeight();
             Color base = getBackground();
+            
             // Create a gradient from a darker version of the base color at the top
-            // to a brighter version at the bottom.
             GradientPaint gp = new GradientPaint(0, 0, base.darker(), 0, h, base.brighter());
             g2.setPaint(gp);
             g2.fillRoundRect(0, 0, w, h, 20, 20);
             g2.dispose();
-            // Let the superclass paint the label (text) over our gradient.
+            // Let the superclass paint the label (text) over our gradient (inheritance)
             super.paintComponent(g);
         }
 
@@ -268,4 +262,16 @@ public class SettingsPanel extends JPanel {
             g2.dispose();
         }
     }
+    
+    /**
+     * Returns a string containing the selected amount and the Play button's enabled status.
+     */
+    @Override
+    public String toString() {
+        return "SelectedAmount: " + selectedAmount + ", Play Button Enabled: " + playButton.isEnabled();
+    }
+
+    
+    
+    
 }

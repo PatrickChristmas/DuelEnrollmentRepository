@@ -406,8 +406,7 @@ public class GamePanelRenderer {
      * @param currentPlayerIndex the index of the current player
      * @param panelWidth the width of the panel
      */
-    public static void drawPlayers(Graphics g, ArrayList<Player> players,
-                                   int currentPlayerIndex, int panelWidth) {
+    public static void drawPlayers(Graphics g, ArrayList<Player> players,int currentPlayerIndex, int panelWidth) {
         int x = panelWidth - 550;
         int y = 50;
         int spacing = 40;

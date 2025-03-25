@@ -577,4 +577,15 @@ public class GamePanelActions {
             return null;
         }
     }
+    
+    
+    @Override
+    public String toString() {
+        return "Pot: $" + pot +
+               ", Bet: $" + currentBet +
+               ", Player: " + currentPlayerIndex +
+               ", Flop: " + flopDealt;
+    }
+    
+    
 }
