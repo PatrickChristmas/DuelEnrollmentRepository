@@ -741,11 +741,24 @@ private void startChipAnimation() {
         Player humanPlayer = players.get(0);
         // calculates the new bet amount
         int newBet = currentBet + amount;
-        
-        // ensure the new bet is within valid bounds
-        if (newBet >= 0 && newBet <= humanPlayer.getMoney()) {
-            currentBet = newBet; // updates the current bet if valid
+             
+        try {
+            // check if the new bet is negative
+            if (newBet < 0) {
+                throw new InvalidBetException("Bet cannot be negative.");
+            }
+            // check if the new bet exceeds the player's current money
+            else if (newBet > humanPlayer.getMoney()) {
+                throw new InvalidBetException("Bet exceeds available balance.");
+            } else {
+                currentBet = newBet; // updates the current bet if valid
+            }
+        } catch (InvalidBetException e) {
+            // handles the exception by displaying an error message
+            System.out.println("Error: " + e.getMessage());
         }
+        
+        
         
         repaint();
     }
