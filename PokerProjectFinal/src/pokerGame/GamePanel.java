@@ -410,35 +410,52 @@ public class GamePanel extends JPanel implements KeyListener {
     }
     
     /**
-	 * array that initializes the players (generates them a name, initial money, and their cards) 
-	 * @param numberOfPlayers, number of players in the game (4)
-	 * @param initialMoney, starting money for the players (1000 or 2000 or 3000) 
-	 */
-    
+     * array that initializes the players (generates them a name, initial money, and their cards) 
+     * @param numberOfPlayers, number of players in the game (4)
+     * @param initialMoney, starting money for the players (1000 or 2000 or 3000) 
+     */
     private void initializePlayers(int numberOfPlayers, int initialMoney) {
-    	// Array of possible player names
+        
+       // pull every AI profile once
+        ArrayList<AIPlayer> aiProfiles = AIProfileManager.loadAIPlayers();
+        int aiProfileIdx = 0;   // where we are in the profile list
+        
+     
         String[] possibleNames = {"Keith", "Tim", "Toby", "Patrick", "Daniel", "Mrs. Kelly",
                                   "Mrs. Baniqued", "Ron", "Craig", "Jack", "Abraham", "Rosseau",
                                   "Jacques", "Maximillian", "Rui", "Bob", "Thomas", "John"};
-        // Shuffle the array manually
         Random rand = new Random();
         for (int i = possibleNames.length - 1; i > 0; i--) {
             int j = rand.nextInt(i + 1);
-            // Swap elements
             String temp = possibleNames[i];
             possibleNames[i] = possibleNames[j];
             possibleNames[j] = temp;
         }
+        
         players = new ArrayList<>(); // initialize the list to hold players
         
-        // loops through the number of players and creates each one
+        //loops through the number of players and creates each one
         for (int i = 0; i < numberOfPlayers; i++) {
-        	// pick a name from the shuffled array
-            String playerName = (i == 0) ? username : possibleNames[i];
-            boolean isHuman = (i == 0);
-            Player player = new Player(playerName, initialMoney, isHuman);
-
-            // deal two cards to each player
+            
+        	// will hold either human or AI 
+            Player player;          
+            
+            if (i == 0) {           
+                String playerName = username;
+                player = new Player(playerName, initialMoney, true);
+                
+            } else {               
+                // try to use a saved profile first
+                if (aiProfileIdx < aiProfiles.size()) {
+                    AIPlayer profile = aiProfiles.get(aiProfileIdx++);
+                    player = new AIPlayer(profile.getName(), profile.getBio(),initialMoney, profile.getWins(), profile.getLosses(),profile.getRank(), profile.getImageID());
+                } else {
+                    String fallbackName = possibleNames[i - 1]; // -1 because user took first seat
+                    player = new AIPlayer(fallbackName, "Generated profile", initialMoney, 0, 0, "Rookie", "default.png");
+                }
+            }
+            
+            // deals two cards to each player
             for (int j = 0; j < 2; j++) {
                 if (!deck.isEmpty()) {
                     player.addCard(deck.dealCard()); // add a card if the deck isn't empty
@@ -446,8 +463,9 @@ public class GamePanel extends JPanel implements KeyListener {
             }
             players.add(player); // add player to the list
         }
+        
         currentPlayerIndex = 0; // starts with the first player
-	    pot = 0; // initialize the pot amount
+        pot = 0;                // initialize the pot amount
     }
 
     
@@ -583,6 +601,7 @@ public class GamePanel extends JPanel implements KeyListener {
         winningPlayer = actions.getWinningPlayer();
         winningCards = actions.getWinningCards();
         flopDealt = actions.isFlopDealt();
+        userHandDescription = actions.getUserHandDescription();
     }
 
     /**

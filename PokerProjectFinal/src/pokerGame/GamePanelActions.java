@@ -70,6 +70,20 @@ public class GamePanelActions {
      * the deck used in the game 
      */
     private Deck deck;
+    
+
+    /**
+     * the description of the user's hand
+     */
+    private String userHandDescription = "";
+    
+    /**
+     * getter for the userHandDescription
+     */
+    public String getUserHandDescription() {
+        return userHandDescription;
+    }
+    
 
     // callbacks
 
@@ -352,6 +366,7 @@ public class GamePanelActions {
         ArrayList<Card> userHand = new ArrayList<>(user.getCards()); // copies user's cards
         userHand.addAll(communityCards); // adds community cards to users hand
         String evaluation = PokerLogic.evaluateHand(user.getCards(), communityCards); // evaluates the hand
+        userHandDescription = evaluation;  
         System.out.println("User's hand after flop: " + evaluation); // prints the evaluation 
     }
 
@@ -362,6 +377,10 @@ public class GamePanelActions {
         if (communityCards.size() == 3) {
             communityCards.add(deck.dealCard()); // adds the turn card to community cards
             System.out.println("Turn dealt: " + communityCards.get(3)); // prints the turn card
+            Player user = players.get(0);               
+            String evaluation = PokerLogic.evaluateHand(user.getCards(), communityCards);
+            userHandDescription = evaluation;           
+            
         } else {
             System.out.println("Turn has already been dealt or insufficient cards in the deck."); // prints message if turn already dealt
         }
@@ -374,6 +393,9 @@ public class GamePanelActions {
         if (communityCards.size() == 4) {
             communityCards.add(deck.dealCard()); // adds the river card to community cards
             System.out.println("River dealt: " + communityCards.get(4)); // prints the river card
+            Player user = players.get(0);
+            String evaluation = PokerLogic.evaluateHand(user.getCards(), communityCards);
+            userHandDescription = evaluation;
         } else {
             System.out.println("River has already been dealt or insufficient cards in the deck."); // prints message if river already dealt
         }
@@ -448,6 +470,16 @@ public class GamePanelActions {
             soleWinner.setMoney(soleWinner.getMoney() + pot); // awards pot to winner
             winningPlayer = soleWinner; // sets winning player
             winningCards = new ArrayList<>(soleWinner.getCards()); // stores winning cards
+            
+           //  AI result
+            if (soleWinner instanceof AIPlayer) {
+                AIProfileManager.updateStats(soleWinner.getName(), true);
+            }
+            for (Player p : players) {
+                if (p instanceof AIPlayer && p != soleWinner) {
+                    AIProfileManager.updateStats(p.getName(), false);
+                }
+            }
             return;
         }
 
@@ -475,6 +507,14 @@ public class GamePanelActions {
             System.out.println("It's a draw. Pot remains unchanged."); // announces a draw
             winningPlayer = null; // no winner
             winningCards = null; // no winning cards
+        }
+        
+        // win  and loss counters for every AI 
+        for (Player p : players) {
+            if (p instanceof AIPlayer) {
+                boolean won = (p == winningPlayer);
+                AIProfileManager.updateStats(p.getName(), won);
+            }
         }
     }
 
