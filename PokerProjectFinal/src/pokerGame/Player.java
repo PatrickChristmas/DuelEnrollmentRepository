@@ -26,6 +26,9 @@ public class Player {
 
     // whether the player is a human or AI
     private boolean isHuman;
+    
+    //rank object 
+    private Rank rank; 
 
     // constructs a player with name, money, and type
     public Player(String name, int initialMoney, boolean isHuman) {
@@ -35,7 +38,17 @@ public class Player {
         this.hasFolded = false; // starts not folded
         this.currentBet = 0; // starts with 0 bet
         this.cards = new ArrayList<>(); // initialize cards
+        this.rank = new Rank(); 
     }
+    
+    public Rank getRank() {
+        return rank;
+    }
+
+    public void setRank(Rank rank) {
+        this.rank = rank;
+    }
+    
 
     /**
      * getter for the player's name 

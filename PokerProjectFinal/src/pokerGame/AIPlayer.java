@@ -10,7 +10,7 @@ public class AIPlayer extends Player {
     private String bio;
     private int wins;
     private int losses;
-    private String rank;
+    private int elo;
     private String imageID; 
 
     /**
@@ -24,12 +24,12 @@ public class AIPlayer extends Player {
      * @param rank rank of AI
      * @param imageID file name
      */
-    public AIPlayer(String name,String bio, int money, int wins, int losses, String rank, String imageID) {
+    public AIPlayer(String name,String bio, int money, int wins, int losses, int elo, String imageID) {
         super(name, money, false);
         this.bio = bio;
         this.wins = wins;
         this.losses = losses;
-        this.rank = rank;
+        this.elo = elo;
         this.imageID = imageID;
     }
  
@@ -86,16 +86,19 @@ public class AIPlayer extends Player {
      * returns the current rank of the ai player
      * @return the rank as a string
      */
-    public String getRank() {
-        return rank;
+    
+    public int getElo() {
+        return elo;
     }
+    
+ 
 
     /**
      * sets the rank of the ai player
      * @param rank the new rank to assign
      */
-    public void setRank(String rank) {
-        this.rank = rank;
+    public void setElo(int elo) {
+        this.elo = elo;
     }
 
     /**
@@ -128,6 +131,6 @@ public class AIPlayer extends Player {
 
     @Override
     public String toString() {
-        return "AIPlayer[" + getName() + ", $" + getMoney() + ", W:" + wins + ", L:" + losses + ", Rank:" + rank + "]";
+        return "AIPlayer[" + getName() + ", $" + getMoney() + ", W:" + wins + ", L:" + losses + ", Elo:" + elo + "]";
     }
 }

@@ -41,8 +41,9 @@ public class AIProfileManager {
             int money = Integer.parseInt(raw[i + 2]);
             int wins = Integer.parseInt(raw[i + 3]);
             int losses = Integer.parseInt(raw[i + 4]);
+            int elo = Integer.parseInt(raw[i + 5]);
 
-            bots[i / 7] = new AIPlayer(raw[i], raw[i + 1], money, wins, losses, raw[i + 5], raw[i + 6]);
+            bots[i / 7] = new AIPlayer(raw[i], raw[i + 1], money, wins, losses, elo, raw[i + 6]);
         }
         file.close();
     }
@@ -62,7 +63,7 @@ public class AIProfileManager {
             out[idx + 2] = Integer.toString(ai.getMoney());
             out[idx + 3] = Integer.toString(ai.getWins());
             out[idx + 4] = Integer.toString(ai.getLosses());
-            out[idx + 5] = ai.getRank();
+       //     out[idx + 5] = ai.getRank();
             out[idx + 6] = ai.getImageID();
         }
         MyFiles file = new MyFiles(filename);

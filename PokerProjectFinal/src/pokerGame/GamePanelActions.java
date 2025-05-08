@@ -472,14 +472,32 @@ public class GamePanelActions {
             winningCards = new ArrayList<>(soleWinner.getCards()); // stores winning cards
             
            //  AI result
-            if (soleWinner instanceof AIPlayer) {
-                AIProfileManager.updateStats(soleWinner.getName(), true);
+        if (soleWinner instanceof AIPlayer) {
+            AIProfileManager.updateStats(soleWinner.getName(), true);
+        }
+        for (Player p : players) {
+            if (p instanceof AIPlayer && p != soleWinner) {
+            	AIProfileManager.updateStats(p.getName(), false);
             }
-            for (Player p : players) {
-                if (p instanceof AIPlayer && p != soleWinner) {
-                    AIProfileManager.updateStats(p.getName(), false);
-                }
+        }
+            
+        // Elo update for default win
+        ArrayList<Rank> opponentRanks = new ArrayList<>();
+        for (Player p : players) {
+        	if (p != soleWinner && !p.hasFolded()) {
+        		opponentRanks.add(p.getRank());
             }
+        }
+        soleWinner.getRank().updateRating(opponentRanks, true);
+        for (Player p : players) {
+        	if (p != soleWinner && !p.hasFolded()) {
+        		ArrayList<Rank> others = new ArrayList<>(opponentRanks);
+                others.remove(p.getRank());
+                others.add(soleWinner.getRank());
+                p.getRank().updateRating(others, false);
+            }
+        }
+            
             return;
         }
 
@@ -516,10 +534,33 @@ public class GamePanelActions {
                 AIProfileManager.updateStats(p.getName(), won);
             }
         }
+        
+        // Rank updates based on Elo
+        if (winner != null) {
+            ArrayList<Rank> opponentRanks = new ArrayList<>();
+            for (Player p : players) {
+                if (!p.hasFolded() && p != winner) {
+                    opponentRanks.add(p.getRank());
+                }
+            }
+            
+            winner.getRank().updateRating(opponentRanks, true);
+
+            for (Player p : players) {
+                if (!p.hasFolded() && p != winner) {
+                    ArrayList<Rank> others = new ArrayList<>(opponentRanks);
+                    others.remove(p.getRank());
+                    others.add(winner.getRank());
+                    p.getRank().updateRating(others, false);
+                }
+            }
+            System.out.println(winner.getName() + "'s new Elo: " + winner.getRank().getRating());
+        }
+        
     }
 
     /**
-     * handles the ai players turn logic, including fold, call, or raise actions
+     * handles the ai players turn logic, including fold, call, or raise actions 
      */
     public void aiTakeTurn(Player aiPlayer) {
         Timer aiTurnTimer = new Timer(1000, new ActionListener() {

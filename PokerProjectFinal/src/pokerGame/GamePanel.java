@@ -448,10 +448,10 @@ public class GamePanel extends JPanel implements KeyListener {
                 // try to use a saved profile first
                 if (aiProfileIdx < aiProfiles.size()) {
                     AIPlayer profile = aiProfiles.get(aiProfileIdx++);
-                    player = new AIPlayer(profile.getName(), profile.getBio(),initialMoney, profile.getWins(), profile.getLosses(),profile.getRank(), profile.getImageID());
+                    player = new AIPlayer(profile.getName(), profile.getBio(),initialMoney, profile.getWins(), profile.getLosses(),profile.getElo(), profile.getImageID());
                 } else {
-                    String fallbackName = possibleNames[i - 1]; // -1 because user took first seat
-                    player = new AIPlayer(fallbackName, "Generated profile", initialMoney, 0, 0, "Rookie", "default.png");
+                    String fallbackName = possibleNames[i - 1]; // -1 because user took first 
+                    player = new AIPlayer(fallbackName, "Generated profile", initialMoney, 0, 0, 1000, "default.png");
                 }
             }
             

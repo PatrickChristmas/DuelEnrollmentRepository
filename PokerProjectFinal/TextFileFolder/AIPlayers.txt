@@ -2,139 +2,139 @@ BotAlpha
 default bio
 2000
 0
-1
-Rookie
+2
+null
 defaultImage.png
 BotBeta
 default bio
 2000
 1
 0
-Rookie
+null
 defaultImage.png
 Keith
 default bio
 2000
 0
 1
-Rookie
+null
 defaultImage.png
 Tim
 default bio
 2000
 0
 0
-Rookie
+null
 defaultImage.png
 Toby
 default bio
 2000
 0
 0
-Rookie
+null
 defaultImage.png
 Patrick
 default bio
 2000
 0
 0
-Rookie
+null
 defaultImage.png
 Daniel
 default bio
 2000
 0
 0
-Rookie
+null
 defaultImage.png
 Mrs. Kelly
 default bio
 2000
 0
 0
-Rookie
+null
 defaultImage.png
 Mrs. Baniqued
 default bio
 2000
 0
 0
-Rookie
+null
 defaultImage.png
 Ron
 default bio
 2000
 0
 0
-Rookie
+null
 defaultImage.png
 Craig
 default bio
 2000
 0
 0
-Rookie
+null
 defaultImage.png
 Jack
 default bio
 2000
 0
 0
-Rookie
+null
 defaultImage.png
 Abraham
 default bio
 2000
 0
 0
-Rookie
+null
 defaultImage.png
 Rosseau
 default bio
 2000
 0
 0
-Rookie
+null
 defaultImage.png
 Jacques
 default bio
 2000
 0
 0
-Rookie
+null
 defaultImage.png
 Maximillian
 default bio
 2000
 0
 0
-Rookie
+null
 defaultImage.png
 Rui
 default bio
 2000
 0
 0
-Rookie
+null
 defaultImage.png
 Bob
 default bio
 2000
 0
 0
-Rookie
+null
 defaultImage.png
 Thomas
 default bio
 2000
 0
 0
-Rookie
+null
 defaultImage.png
 John
 default bio
 2000
 0
 0
-Rookie
+null
 defaultImage.png
