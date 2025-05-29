@@ -39,17 +39,18 @@ public class UserRegistration {
         strings = file.readToArray();
         if (strings == null) return;
 
-        users = new User[strings.length / 5];
-        for (int u = 0; u < strings.length; u += 5) {
-            int money = 0, wins = 0, losses = 0;
+        users = new User[strings.length / 6];
+        for (int u = 0; u < strings.length; u += 6) {
+            int money = 0, wins = 0, losses = 0, elo = 1000;
             try {
                 money = Integer.parseInt(strings[u + 2]);
                 wins = Integer.parseInt(strings[u + 3]);
                 losses = Integer.parseInt(strings[u + 4]);
+                elo = Integer.parseInt(strings[u + 5]);
             } catch (NumberFormatException e) {
                 System.out.println("Error parsing numeric values for user " + strings[u] + ". Defaulting to 0.");
             }
-            users[u / 5] = new User(strings[u], strings[u + 1], money, wins, losses);
+            users[u / 6] = new User(strings[u], strings[u + 1], money, wins, losses, elo);
         }
         file.close();
     }
@@ -61,13 +62,14 @@ public class UserRegistration {
     public static void closeRegistration() {
         if (users == null) return;
         MyFiles file = new MyFiles(filename);
-        String[] strings = new String[users.length * 5];
+        String[] strings = new String[users.length * 6];
         for (int u = 0; u < users.length; u++) {
-            strings[5 * u] = users[u].getUser();
-            strings[5 * u + 1] = users[u].getPassword();
-            strings[5 * u + 2] = Integer.toString(users[u].getCurrentMoney());
-            strings[5 * u + 3] = Integer.toString(users[u].getWins());
-            strings[5 * u + 4] = Integer.toString(users[u].getLosses());
+            strings[6 * u] = users[u].getUser();
+            strings[6 * u + 1] = users[u].getPassword();
+            strings[6 * u + 2] = Integer.toString(users[u].getCurrentMoney());
+            strings[6 * u + 3] = Integer.toString(users[u].getWins());
+            strings[6 * u + 4] = Integer.toString(users[u].getLosses());
+            strings[6 * u + 5] = Integer.toString(users[u].getElo());
         }
         file.writeToFile(strings);
         file.close();

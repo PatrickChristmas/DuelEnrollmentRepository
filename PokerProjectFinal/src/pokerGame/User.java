@@ -14,6 +14,7 @@ public class User {
     private int currentMoney; // New field to store the current money
     private int wins;         // Number of games won
     private int losses;       // Number of games lost
+    private int elo;
 
     /**
      * Constructor that sets the username, password, and current money.
@@ -24,13 +25,19 @@ public class User {
      * @param wins number of games won
      * @param losses number of games lost
      */
-    public User(String user, String password, int currentMoney, int wins, int losses) {
+    public User(String user, String password, int currentMoney, int wins, int losses, int elo) {
         this.user = user;
         this.password = password;
         this.currentMoney = currentMoney;
         this.wins = wins;
         this.losses = losses;
+        this.elo = elo;
     }
+    
+    public User(String user, String password, int currentMoney, int wins, int losses) {
+        this(user, password, currentMoney, wins, losses, 1000);
+    }
+    
     
     /**
      * Overloaded constructor that defaults currentMoney to 0, wins and losses to 0.
@@ -111,6 +118,18 @@ public class User {
     public void setLosses(int losses) {
         this.losses = losses;
     }
+    
+    
+    
+    public int getElo() {
+        return elo;
+    }
+
+    public void setElo(int elo) {
+        this.elo = elo;
+    }
+    
+    
     
     /**
      * Returns a string representation of the user including the current money, wins, and losses.

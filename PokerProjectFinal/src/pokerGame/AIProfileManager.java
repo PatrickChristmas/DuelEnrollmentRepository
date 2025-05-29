@@ -38,10 +38,10 @@ public class AIProfileManager {
         }
         bots = new AIPlayer[raw.length / 7];
         for (int i = 0; i < raw.length; i += 7) {
-            int money = Integer.parseInt(raw[i + 2]);
-            int wins = Integer.parseInt(raw[i + 3]);
-            int losses = Integer.parseInt(raw[i + 4]);
-            int elo = Integer.parseInt(raw[i + 5]);
+        	int money = parseIntSafe(raw[i + 2]);
+        	int wins = parseIntSafe(raw[i + 3]);
+        	int losses = parseIntSafe(raw[i + 4]);
+        	int elo = parseIntSafe(raw[i + 5]);
 
             bots[i / 7] = new AIPlayer(raw[i], raw[i + 1], money, wins, losses, elo, raw[i + 6]);
         }
@@ -120,6 +120,7 @@ public class AIProfileManager {
         try {
             return Integer.parseInt(s);
         } catch (NumberFormatException e) {
+            System.out.println("Error parsing numeric value: \"" + s + "\", defaulting to 0");
             return 0;
         }
     }

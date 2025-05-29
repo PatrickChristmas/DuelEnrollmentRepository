@@ -184,8 +184,12 @@ public class UserSetUp extends JPanel {
 
             writer.println(username); // Writes the username to file
             writer.println(password); // Writes the password to file
+            writer.println("1000"); // starting money
+            writer.println("0");    // wins
+            writer.println("0");    // losses
+            writer.println("1000"); // starting Elo
+            
             writer.println(); // Adds a new line after each user entry
-
             writer.close(); // Closes and saves the file
             System.out.println("User data has been written to the file."); 
         } catch (IOException e) {

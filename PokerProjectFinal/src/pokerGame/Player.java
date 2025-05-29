@@ -29,6 +29,10 @@ public class Player {
     
     //rank object 
     private Rank rank; 
+    
+    //elo (determines rank)
+    private int elo;
+
 
     // constructs a player with name, money, and type
     public Player(String name, int initialMoney, boolean isHuman) {
@@ -39,7 +43,25 @@ public class Player {
         this.currentBet = 0; // starts with 0 bet
         this.cards = new ArrayList<>(); // initialize cards
         this.rank = new Rank(); 
+        this.elo = 1000; // Default starting Elo
+
     }
+    
+    public Player(String name, int initialMoney, boolean isHuman, int elo) {
+        this(name, initialMoney, isHuman);
+        this.elo = elo;
+    }
+    
+    
+    public int getElo() {
+        return elo;
+    }
+
+    public void setElo(int elo) {
+        this.elo = elo;
+    }
+    
+    
     
     public Rank getRank() {
         return rank;
