@@ -9,12 +9,40 @@ package pokerGame;
  */
 public class User {
     
-    private String user;
-    private String password;
-    private int currentMoney; // New field to store the current money
-    private int wins;         // Number of games won
-    private int losses;       // Number of games lost
-    private int elo;
+	/**
+	 * The username  with the player
+	 */
+	private String user;
+
+	/**
+	 * The password  with the player
+	 */
+	private String password;
+
+	/**
+	 * current amount of money the player has in game
+	 */
+	private int currentMoney;
+
+	/**
+	 *  total number of games  player has won
+	 */
+	private int wins;
+
+	/**
+	 * total number of games the player  lost
+	 */
+	private int losses;
+
+	/**
+	 * players current elo rating, used for ranking on the leaderboard.
+	 */
+	private int elo;
+
+	/**
+	 *  players inventory, containing owned items .
+	 */
+	private Inventory inventory; 
 
     /**
      * Constructor that sets the username, password, and current money.
@@ -32,16 +60,42 @@ public class User {
         this.wins = wins;
         this.losses = losses;
         this.elo = elo;
+        this.inventory = new Inventory(); 
     }
     
+    /**
+     * Constructs a new User object with the username, password, money, wins, and losses.
+     * Sets the initial elo rating to 1000 by default
+     * @param user         the username of the user
+     * @param password     the users password
+     * @param currentMoney  amount of money the user  has
+     * @param wins          number of games the user has won
+     * @param losses        number of games the user has lost
+     */
     public User(String user, String password, int currentMoney, int wins, int losses) {
         this(user, password, currentMoney, wins, losses, 1000);
     }
+
+    /**
+     * returns the users inventory, which includes owned items 
+     * @return the inventory of the user
+     */
+    public Inventory getInventory() {
+        return inventory;
+    }
+
+    /**
+     * Sets the users inventory to the specified Inventory object.
+     * @param inventory the inventory to assign to the user
+     */
+    public void setInventory(Inventory inventory) {
+        this.inventory = inventory;
+    }
+    
     
     
     /**
      * Overloaded constructor that defaults currentMoney to 0, wins and losses to 0.
-     * 
      * @param user username
      * @param password password
      */
@@ -49,25 +103,40 @@ public class User {
         this(user, password, 0, 0, 0);
     }
     
+    /**
+     * returns the username associated with this user
+     * @return the username
+     */
     public String getUser() {
         return user;
     }
-    
+
+    /**
+     * sets the username for this user
+     * @param user the new username to set
+     */
     public void setUser(String user) {
         this.user = user;
     }
-    
+
+    /**
+     * returns the password associated with this user.
+     * @return the password
+     */
     public String getPassword() {
         return password;
     }
-    
+
+    /**
+     * sets the password for this user.
+     * @param password the new password to set
+     */
     public void setPassword(String password) {
         this.password = password;
     }
     
     /**
-     * Returns the current money value.
-     * 
+     * returns the current money value.
      * @return the current money as an integer.
      */
     public int getCurrentMoney() {
@@ -75,17 +144,15 @@ public class User {
     }
     
     /**
-     * Sets the current money value.
-     * 
-     * @param currentMoney the new current money value.
+     * sets the current money value
+     * @param currentMoney the new current money value
      */
     public void setCurrentMoney(int currentMoney) {
         this.currentMoney = currentMoney;
     }
 
     /**
-     * Returns the number of wins.
-     * 
+     * returns the number of wins
      * @return wins
      */
     public int getWins() {
@@ -93,8 +160,7 @@ public class User {
     }
 
     /**
-     * Sets the number of wins.
-     * 
+     * sets the number of wins
      * @param wins the new win count
      */
     public void setWins(int wins) {
@@ -102,8 +168,7 @@ public class User {
     }
 
     /**
-     * Returns the number of losses.
-     * 
+     * returns the number of losses
      * @return losses
      */
     public int getLosses() {
@@ -111,8 +176,7 @@ public class User {
     }
 
     /**
-     * Sets the number of losses.
-     * 
+     * sets the number of losses.
      * @param losses the new loss count
      */
     public void setLosses(int losses) {

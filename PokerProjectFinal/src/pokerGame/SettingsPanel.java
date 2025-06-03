@@ -28,7 +28,6 @@ import javax.swing.SwingConstants;
 public class SettingsPanel extends JPanel {
 
     private GradientButton playButton;                  // Button to start the game
-    private GradientButton selectDifficultyButton;        // Button to select the difficulty level
     private JRadioButton thousandDollarButton;            // Radio button for $1000 starting amount
     private JRadioButton twoThousandDollarButton;           // Radio button for $2000 starting amount
     private JRadioButton threeThousandDollarButton;         // Radio button for $3000 starting amount
@@ -61,15 +60,7 @@ public class SettingsPanel extends JPanel {
         gbc.gridwidth = 2;
         add(welcomeLabel, gbc);
 
-        // Create the "Select Difficulty" button using our custom GradientButton
-        selectDifficultyButton = new GradientButton("Select Difficulty");
-        selectDifficultyButton.setBackground(new Color(128, 0, 0)); // Maron color
-        selectDifficultyButton.setForeground(Color.WHITE);
-        selectDifficultyButton.setFont(new Font("Arial", Font.BOLD, 24));
-        gbc.gridx = 0;
-        gbc.gridy = 1;
-        gbc.gridwidth = 1;
-        add(selectDifficultyButton, gbc);
+        
 
         // Create the "Play" button using   GradientButton
         playButton = new GradientButton("Play");
@@ -80,26 +71,7 @@ public class SettingsPanel extends JPanel {
         gbc.gridy = 1;
         add(playButton, gbc);
 
-        // Shows a pop-up with "easy", "medium", and "hard" options
-        selectDifficultyButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent e) {
-                Object[] difficulties = {"Easy", "Medium", "Hard"};
-                int selected = JOptionPane.showOptionDialog(
-                    SettingsPanel.this,
-                    "Select Difficulty",
-                    "Difficulty Selection",
-                    JOptionPane.DEFAULT_OPTION,
-                    JOptionPane.QUESTION_MESSAGE,
-                    null,
-                    difficulties,
-                    difficulties[0]
-                );
-                if (selected != -1) {
-                    System.out.println("Selected difficulty: " + difficulties[selected]);
-                }
-            }
-        });
+        
 
         // creates an ActionListener for the radio buttons to update the selected amount.
         ActionListener selectionListener = new ActionListener() {
@@ -181,14 +153,7 @@ public class SettingsPanel extends JPanel {
         playButton.addActionListener(listener);
     }
 
-    /**
-     * Sets the action listener for the Select Difficulty button.
-     *
-     * @param listener The action listener to add to the Select Difficulty button.
-     */
-    public void setSelectDifficultyListener(ActionListener listener) {
-        selectDifficultyButton.addActionListener(listener);
-    }
+    
 
     
     /**

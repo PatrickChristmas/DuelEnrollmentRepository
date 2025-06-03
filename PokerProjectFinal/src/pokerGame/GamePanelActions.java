@@ -8,6 +8,8 @@ import java.util.Random;
 
 /**
  * contains all game logic methods (fold, call, raise, turn management, dealing, winner determination etc)
+ * @author Patrick Christmas 
+ * @version June 1 2025
  */
 public class GamePanelActions {
 
@@ -448,6 +450,39 @@ public class GamePanelActions {
         }
         return true;
     }
+    
+    public void startNewGame() {
+        // Reset game state
+        pot = 0;
+        currentBet = 0;
+        userRaiseCount = 0;
+        totalAIBets = 0;
+        flopDealt = false;
+        winningPlayer = null;
+        winningCards = new ArrayList<>();
+        communityCards = new ArrayList<>();
+        deck = new Deck();
+        deck.shuffle();
+
+        // Reset each player
+        for (Player player : players) {
+            player.resetForNewRound();
+            player.setCards(new ArrayList<>());
+            drawCard(player);
+            drawCard(player);
+        }
+
+        currentPlayerIndex = 0;
+        gameStarted = true;
+
+        if (onStateChange != null) {
+            onStateChange.run();
+        }
+
+        System.out.println("New game started.");
+        System.out.println("Dealt new hands. " + players.get(0).getName() + " starts.");
+    }
+    
 
     /**
      * determines the winner of the round based on the players hands and community cards
@@ -557,6 +592,18 @@ public class GamePanelActions {
             System.out.println(winner.getName() + "'s new Elo: " + winner.getRank().getRating());
         }
         
+     // player at index 0 is the human user
+        Player userPlayer = players.get(0);
+        boolean userWon = (userPlayer == winningPlayer);
+
+        // Update User object
+        UserManager.updateUserStats(userPlayer.getName(), userPlayer.getMoney(), userWon);
+        // Delay before starting new game to let player see result
+        Timer delay = new Timer(3000, e -> startNewGame());
+        delay.setRepeats(false);
+        delay.start();
+        
+        
     }
 
     /**
@@ -572,6 +619,7 @@ public class GamePanelActions {
                     aiPlayer.fold(); // ai folds
                     System.out.println(aiPlayer.getName() + " folded."); // prints fold message
                 } else if (action >= 5 && action < 70) { // most of the time it will call
+                	aiPlayer.setMoney(1000);
                     if (aiPlayer.getMoney() >= amountToCall) {
                         aiPlayer.setMoney(aiPlayer.getMoney() - amountToCall);
                         aiPlayer.setCurrentBet(aiPlayer.getCurrentBet() + amountToCall);
@@ -620,11 +668,17 @@ public class GamePanelActions {
      * resets the round, clearing bets and resetting player statuses
      */
     public void resetRound() {
+    	
         pot = 0;
         for (Player player : players) {
             player.setCurrentBet(0);
             player.fold();
+            if(!player.isHuman()) {
+            	player.setMoney(1000); 
+            }
         }
+        
+       
         currentPlayerIndex = 0;
         gameStarted = false;
     }
@@ -658,6 +712,18 @@ public class GamePanelActions {
             return null;
         }
     }
+    
+    /**
+     * formats the hand into a string 
+     **/
+    private String formatHand(ArrayList<Card> hand) {
+        StringBuilder sb = new StringBuilder();
+        for (Card c : hand) {
+            sb.append("[").append(c.getShortName()).append("]");
+        }
+        return sb.toString();
+    }
+    
     
     
     @Override

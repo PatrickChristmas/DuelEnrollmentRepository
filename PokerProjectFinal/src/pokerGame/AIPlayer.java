@@ -12,6 +12,7 @@ public class AIPlayer extends Player {
     private int losses;
     private int elo;
     private String imageID; 
+    private int money; 
 
     /**
      * constructs an AIPlayer using profile information
@@ -23,14 +24,16 @@ public class AIPlayer extends Player {
      * @param losses total losses 
      * @param rank rank of AI
      * @param imageID file name
+     * 
+     * @author Patrick Christmas
+     * @version June 1 2025
      */
-    public AIPlayer(String name,String bio, int money, int wins, int losses, int elo, String imageID) {
+    public AIPlayer(String name,String bio, int money, int wins, int losses, int elo) {
         super(name, money, false);
         this.bio = bio;
         this.wins = wins;
         this.losses = losses;
         this.elo = elo;
-        this.imageID = imageID;
     }
  
 
@@ -101,22 +104,14 @@ public class AIPlayer extends Player {
         this.elo = elo;
     }
 
-    /**
-     * returns the image ID associated with the ai player
-     * @return the image ID
-     */
-    public String getImageID() {
-        return imageID;
+    
+    public void setMoney(int money) {
+    	this.money = money;
     }
-
-    /**
-     * sets the image ID for the ai player
-     * @param imageID the new image identifier
-     */
-    public void setImageID(String imageID) {
-        this.imageID = imageID;
+    
+    public int getMoney() {
+    	return money; 
     }
-
 
     /**
      *  increment wins/losses after a round

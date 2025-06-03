@@ -36,14 +36,18 @@ public class AIProfileManager {
             bots = new AIPlayer[0];
             return;
         }
-        bots = new AIPlayer[raw.length / 7];
-        for (int i = 0; i < raw.length; i += 7) {
-        	int money = parseIntSafe(raw[i + 2]);
-        	int wins = parseIntSafe(raw[i + 3]);
-        	int losses = parseIntSafe(raw[i + 4]);
-        	int elo = parseIntSafe(raw[i + 5]);
 
-            bots[i / 7] = new AIPlayer(raw[i], raw[i + 1], money, wins, losses, elo, raw[i + 6]);
+        // Each profile must be at least 6 lines
+        bots = new AIPlayer[raw.length / 6];
+        for (int i = 0; i < raw.length; i += 6) {
+            int money = parseIntSafe(raw[i + 2]);
+            int wins = parseIntSafe(raw[i + 3]);
+            int losses = parseIntSafe(raw[i + 4]);
+            int elo = parseIntSafe(raw[i + 5]);
+
+           
+
+            bots[i / 6] = new AIPlayer(raw[i], raw[i + 1], money, wins, losses, elo);
         }
         file.close();
     }
@@ -53,18 +57,17 @@ public class AIProfileManager {
      */
     private static void closeProfiles() {
         if (bots == null) return;
-
-        String[] out = new String[bots.length * 7];
+        String[] out = new String[bots.length * 6];
         for (int i = 0; i < bots.length; i++) {
             AIPlayer ai = bots[i];
-            int idx = i * 7;
+            int idx = i * 6;
             out[idx] = ai.getName();
             out[idx + 1] = ai.getBio();
             out[idx + 2] = Integer.toString(ai.getMoney());
             out[idx + 3] = Integer.toString(ai.getWins());
             out[idx + 4] = Integer.toString(ai.getLosses());
-       //     out[idx + 5] = ai.getRank();
-            out[idx + 6] = ai.getImageID();
+            out[idx + 5] = Integer.toString(ai.getElo());
+            // Omit rank and image
         }
         MyFiles file = new MyFiles(filename);
         file.writeToFile(out);

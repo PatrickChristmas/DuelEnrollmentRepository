@@ -15,5 +15,7 @@
 	<classpathentry kind="lib" path="C:/Users/pac62/Downloads/httpcomponents-client-5.4.3-bin/lib/commons-cli-1.9.0.jar"/>
 	<classpathentry kind="lib" path="C:/Users/pac62/Downloads/httpcomponents-client-5.4.3-bin/lib/slf4j-api-1.7.36.jar"/>
 	<classpathentry kind="lib" path="C:/Users/pac62/Downloads/httpcomponents-client-5.4.3-bin/lib/httpcore5-h2-5.3.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/pac62/Downloads/json-20230227.jar"/>
+	<classpathentry kind="lib" path="C:/Users/pac62/Downloads/gson-2.10.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

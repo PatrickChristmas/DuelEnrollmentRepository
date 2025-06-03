@@ -1,140 +1,18 @@
 BotAlpha
-default bio
-2000
+An experimental terminator prototype built in 2000, BotAlpha was one of the first models tested for adaptability and independent logic. Known for its calculated decision making and occasional sarcasm.
+0
+1
+16
+1100
+BotBeta
+A companion to BotAlpha, BotBeta was designed with an improved emotional response module. Often plays devil’s advocate and thinks before speaking sometimes too long.
 0
 2
-null
-defaultImage.png
-BotBeta
-default bio
-2000
-1
-0
-null
-defaultImage.png
+14
+1080
 Keith
-default bio
-2000
+Very nice guy, just a bit dense. If you try and joke with him, he won't get it. However, he'll always make sure to mention how nice it is outside.
 0
-1
-null
-defaultImage.png
-Tim
-default bio
-2000
-0
-0
-null
-defaultImage.png
-Toby
-default bio
-2000
-0
-0
-null
-defaultImage.png
-Patrick
-default bio
-2000
-0
-0
-null
-defaultImage.png
-Daniel
-default bio
-2000
-0
-0
-null
-defaultImage.png
-Mrs. Kelly
-default bio
-2000
-0
-0
-null
-defaultImage.png
-Mrs. Baniqued
-default bio
-2000
-0
-0
-null
-defaultImage.png
-Ron
-default bio
-2000
-0
-0
-null
-defaultImage.png
-Craig
-default bio
-2000
-0
-0
-null
-defaultImage.png
-Jack
-default bio
-2000
-0
-0
-null
-defaultImage.png
-Abraham
-default bio
-2000
-0
-0
-null
-defaultImage.png
-Rosseau
-default bio
-2000
-0
-0
-null
-defaultImage.png
-Jacques
-default bio
-2000
-0
-0
-null
-defaultImage.png
-Maximillian
-default bio
-2000
-0
-0
-null
-defaultImage.png
-Rui
-default bio
-2000
-0
-0
-null
-defaultImage.png
-Bob
-default bio
-2000
-0
-0
-null
-defaultImage.png
-Thomas
-default bio
-2000
-0
-0
-null
-defaultImage.png
-John
-default bio
-2000
-0
-0
-null
-defaultImage.png
+2
+14
+1050

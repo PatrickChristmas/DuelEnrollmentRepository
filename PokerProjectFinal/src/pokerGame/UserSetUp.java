@@ -4,6 +4,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.UIManager;
 import javax.swing.JPasswordField; 
 import java.awt.Color;
 import java.awt.Font;
@@ -19,12 +20,11 @@ import java.io.PrintWriter;
 
 /**
  * @author PatrickChristmas
- * @version December 20 2024.
- * The UserSetUp class provides a user interface for user login and registration. It allows users to input
+ * @version May 30 2025.
+ * The UserSetUp class provides a user interface for user login. It allows users to input
  * a username and password, and saving it to a file.
- * 
  * This panel includes fields for the username, password, an error message label, and a login button.
- * It ensures that the username contains at least one capital letter and one number, and it prevents 
+ * It ensures that the passowrd contains at least one capital letter and one number, and it prevents 
  * duplicate usernames by checking against existing usernames in the text file .
  */
 public class UserSetUp extends JPanel {
@@ -33,6 +33,7 @@ public class UserSetUp extends JPanel {
     private JPasswordField passwordField; // PasswordField for password input
     private JButton loginButton; // Button to trigger the login action
     private JLabel errorLabel; // Label to display error messages
+    private JButton togglePasswordButton; // Button to toggle password visibility
 
     /**
      * Constructor that sets up the UserSetUp panel with all the components.
@@ -77,7 +78,27 @@ public class UserSetUp extends JPanel {
         gbc.gridx = 0; // 0th column
         gbc.gridy = 2; // 2nd row
         add(passwordLabel, gbc); // Adds the password label to the panel
+         // password visibility toggle button
+        togglePasswordButton = new JButton("Show");
+        togglePasswordButton.setFont(new Font("Serif", Font.PLAIN, 14));
+        togglePasswordButton.setFocusPainted(false);
+        gbc.gridx = 2; // next to the password field
+        gbc.gridy = 2;
+        add(togglePasswordButton, gbc);
 
+        togglePasswordButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (passwordField.getEchoChar() != '\u0000') {
+                    passwordField.setEchoChar('\u0000'); // Show password
+                    togglePasswordButton.setText("Hide");
+                } else {
+                    passwordField.setEchoChar((Character) UIManager.get("PasswordField.echoChar")); // Hide password
+                    togglePasswordButton.setText("Show");
+                }
+            }
+        });
+        
         // Password field
         passwordField = new JPasswordField(20);
         passwordField.setFont(new Font("Serif", Font.PLAIN, 20)); 
@@ -128,9 +149,9 @@ public class UserSetUp extends JPanel {
             return;
         }
 
-        // Checks if it is a valid username (must contain a capital letter and a number)
-        if (!isUsernameValid(username)) {
-            setErrorMessage("Username must contain at least one capital letter and one number.");
+        // Checks if it is a valid password (must contain a capital letter and a number)
+        if (!isPasswordValid(password)) {
+            setErrorMessage("Password must contain at least one capital letter and one number.");
             return;
         }
 
@@ -151,12 +172,12 @@ public class UserSetUp extends JPanel {
      * @param username The username to be checked.
      * @return True if the username contains a capital letter and a number, false if not.
      */
-    private boolean isUsernameValid(String username) {
+    private boolean isPasswordValid(String password) {
         boolean hasCapital = false;
         boolean hasNumber = false;
 
         // Checks if the username contains at least one uppercase letter and one digit
-        for (char c : username.toCharArray()) {
+        for (char c : password.toCharArray()) {
             if (Character.isUpperCase(c)) {
                 hasCapital = true; 
             }
@@ -188,8 +209,6 @@ public class UserSetUp extends JPanel {
             writer.println("0");    // wins
             writer.println("0");    // losses
             writer.println("1000"); // starting Elo
-            
-            writer.println(); // Adds a new line after each user entry
             writer.close(); // Closes and saves the file
             System.out.println("User data has been written to the file."); 
         } catch (IOException e) {

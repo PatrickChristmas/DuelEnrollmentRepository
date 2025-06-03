@@ -1,6 +1,8 @@
 package pokerGame;
 
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
+
 import org.bishopireton.files.MyFiles;
 
 /**
@@ -37,7 +39,16 @@ public class UserRegistration {
         MyFiles file = new MyFiles(filename);
 
         strings = file.readToArray();
-        if (strings == null) return;
+        if (strings == null) 
+        	return;
+        
+        if (strings.length % 6 != 0) {
+            System.out.println("ERROR: Line count is not divisible by 6.");
+            for (int i = 0; i < strings.length; i++) {
+                System.out.println("Line " + i + ": " + strings[i]);
+            }
+            return; // prevent crashing
+        }
 
         users = new User[strings.length / 6];
         for (int u = 0; u < strings.length; u += 6) {
@@ -74,6 +85,18 @@ public class UserRegistration {
         file.writeToFile(strings);
         file.close();
     }
+    
+    
+    public static ArrayList<User> getAllUsers() {
+        if (users == null) return new ArrayList<>();
+        ArrayList<User> list = new ArrayList<>();
+        for (User u : users) {
+            list.add(u);
+        }
+        return list;
+    }
+
+      
 
     /**
      * Checks if the given username is already taken.

@@ -26,13 +26,12 @@ public class Player {
 
     // whether the player is a human or AI
     private boolean isHuman;
-    
-    //rank object 
-    private Rank rank; 
-    
+   
+    //rank object
+    private Rank rank;
+   
     //elo (determines rank)
     private int elo;
-
 
     // constructs a player with name, money, and type
     public Player(String name, int initialMoney, boolean isHuman) {
@@ -42,69 +41,94 @@ public class Player {
         this.hasFolded = false; // starts not folded
         this.currentBet = 0; // starts with 0 bet
         this.cards = new ArrayList<>(); // initialize cards
-        this.rank = new Rank(); 
+        this.rank = new Rank();
         this.elo = 1000; // Default starting Elo
-
     }
-    
+
+    /**
+     * constructs a player with name, money, type, and custom Elo
+     * @param name
+     * @param initialMoney
+     * @param isHuman
+     * @param elo
+     */
     public Player(String name, int initialMoney, boolean isHuman, int elo) {
         this(name, initialMoney, isHuman);
         this.elo = elo;
     }
-    
-    
+
+    /**
+     * getter for elo rating
+     * @return elo
+     */
     public int getElo() {
         return elo;
     }
 
+    /**
+     * setter for elo rating
+     * @param elo
+     */
     public void setElo(int elo) {
         this.elo = elo;
     }
-    
-    
-    
+
+    /**
+     * getter for player rank object
+     * @return rank
+     */
     public Rank getRank() {
         return rank;
     }
 
+    /**
+     * setter for player rank
+     * @param rank
+     */
     public void setRank(Rank rank) {
         this.rank = rank;
     }
-    
 
     /**
-     * getter for the player's name 
-     * @return name 
+     * getter for the player's name
+     * @return name
      */
     public String getName() {
         return name;
     }
 
     /**
-     * getter for the player's money 
+     * getter for the player's money
      * @return money
      */
     public int getMoney() {
         return money;
     }
-    
+
+    /**
+     * sets the player's card hand
+     * @param newCards
+     */
     public void setCards(ArrayList<Card> newCards) {
         this.cards = newCards;
     }
 
+    /**
+     * sets whether the player has folded
+     * @param folded
+     */
     public void setFolded(boolean folded) {
         this.hasFolded = folded;
     }
-    
-    
+
     /**
-     * setter for the money 
+     * setter for the money
      * @param money
      */
     public void setMoney(int money) {
         this.money = money;
     }
-    
+
     /**
      * getter for the current bet
      * @return current bet
@@ -112,15 +136,15 @@ public class Player {
     public int getCurrentBet() {
         return currentBet;
     }
-    
+
     /**
-     * setter for the currnet bet 
+     * setter for the currnet bet
      * @param currentBet
      */
     public void setCurrentBet(int currentBet) {
         this.currentBet = currentBet;
     }
-    
+
     /**
      * checks if the player has folded
      * @return
@@ -137,7 +161,7 @@ public class Player {
     }
 
     /**
-     * gets the cards held by the player 
+     * gets the cards held by the player
      * @return cards
      */
     public ArrayList<Card> getCards() {
@@ -162,11 +186,14 @@ public class Player {
         }
         cards.add(card);
     }
-    
+
+    /**
+     * resets player state for the next round
+     */
     public void resetForNewRound() {
         this.currentBet = 0;
         this.cards.clear();  
-        this.hasFolded = false; 
+        this.hasFolded = false;
     }
     
     

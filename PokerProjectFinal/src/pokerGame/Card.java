@@ -57,6 +57,17 @@ public class Card {
     public void setValue(String value) {
         this.value = value;
     }
+    
+    /**
+     * shortens the names of the suits and ranks, helpful for debugging
+     * @return the shorten String of rank and suit
+     */
+    public String getShortName() {
+        String rankShort = value.equals("10") ? "T" : value.substring(0, 1).toUpperCase();
+        String suitShort = type.substring(0, 1).toLowerCase(); 
+        return rankShort + suitShort;
+    }
+    
 
     /**
      * Gets the image of the card.

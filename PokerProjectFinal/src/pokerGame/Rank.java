@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 /**
  * Rank is based of Elo which rating is updated based on the player's performance relative to the average opponent rating
- * @author Patrick
+ * @author Patrick Christmas
  * @version May 5 2025
  */
 public class Rank {
@@ -76,24 +76,10 @@ public class Rank {
         this.rating = rating;
     }
 
-    /**
-     * returns a string  representing the rank tier
-     */
-    public String getRankTier() {
-        if (rating >= 2400) 
-        	return "Champion";
-        if (rating >= 2000) 
-        	return "Plantinum";
-        if (rating >= 1600) 
-        	return "Gold";
-        if (rating >= 1200) 
-        	return "Bronze";
-        
-        return "Copper";
-    }
+    
 
     @Override
     public String toString() {
-        return "Rating: " + rating + " (" + getRankTier() + ")";
+        return "Rating: " + rating;
     }
 }

@@ -14,6 +14,8 @@ import java.util.ArrayList;
 
 /**
  * contains methods for rendering  poker game 
+ * @author Patrick Christmas
+ * @version June 2 2025
  */
 public class GamePanelRenderer {
     /**
